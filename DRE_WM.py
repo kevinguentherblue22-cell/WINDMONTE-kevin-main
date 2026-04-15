@@ -77,16 +77,16 @@ def DREs(input_data, G=None):
 
     # Minimal local defaults (used if G is not provided). These mirror
     # the constants used previously in the module's example code.
-    V_default = 95.33
-    RHO_default = 0.002378
-    S_default = 7.44
-    W_default = 15
+   # V_default = 95.33
+   # RHO_default = 0.002378
+  #  S_default = 7.44
+   # W_default = 15
+    Theta_offset = 10 # nose up balance at 0 AOA is positive
 
     # allow G to override S and W, otherwise use defaults
-    S_local = G.get('S') if isinstance(G, dict) and 'S' in G else S_default
-    W_local = G.get('W') if isinstance(G, dict) and 'W' in G else W_default
-    #Q = 0.5 * RHO_default * V_default**2
-
+    S_local = G.get('S') 
+    W_local = G.get('W') 
+    
     for e in input_data:
         N_meas = e.get('NF', 0)
         A_meas = e.get('AF', 0)
@@ -94,14 +94,16 @@ def DREs(input_data, G=None):
         Q = e.get('Q', 0)
         A_rad = math.radians(Theta)
 
-        N_aero = N_meas - W_local * math.sin(A_rad)
-        A_aero = A_meas - W_local * math.cos(A_rad)
+        N_aero = N_meas + W_local * math.cos(A_rad)
+        A_aero = A_meas - W_local * math.sin(A_rad)
 
-        L = N_aero * math.cos(A_rad) - A_aero * math.sin(A_rad)
+        L = N_aero * math.cos(A_rad) - A_aero * math.sin(A_rad) 
         D = N_aero * math.sin(A_rad) + A_aero * math.cos(A_rad)
 
         C_L = L / (Q * S_local)
         C_D = D / (Q * S_local)
+
+        AOA = Theta - Theta_offset
 
         out.append({
             'NF': N_meas,
@@ -116,6 +118,7 @@ def DREs(input_data, G=None):
             'W': W_local,
             'CL': C_L,
             'CD': C_D,
+            'AOA': AOA
         })
 
     return out

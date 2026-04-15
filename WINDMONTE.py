@@ -86,11 +86,11 @@ follow the format used in the example:
     - source: label the source for plotting later
     - units: list the units, must match the units in the 'data' variable nominal values for each measurement the error source applies to
 """
-U_systematic.add_error_source(measurements=['Theta'],distribution='norm',params=[0,0.018],source='b_Theta',units='deg')
+U_systematic.add_error_source(measurements=['Theta'],distribution='norm',params=[0,0.05],source='b_Theta',units='deg')
 U_systematic.add_error_source(measurements=['Q'],distribution='norm',params=[0,0.07],source='b_Q',units='psf')
-U_systematic.add_error_source(measurements=['NF'],distribution='norm',params=[0,0.15/2],source='b_NF',units='lbf')
+U_systematic.add_error_source(measurements=['NF'],distribution='norm',params=[0,0.75/2],source='b_NF',units='lbf')
 U_systematic.add_error_source(measurements=['SF'],distribution='norm',params=[0,0.15/2],source='b_SF',units='lbf')
-U_systematic.add_error_source(measurements=['AF'],distribution='norm',params=[0,0.075/2],source='b_AF',units='lbf')
+U_systematic.add_error_source(measurements=['AF'],distribution='norm',params=[0,0.0375/2],source='b_AF',units='lbf')
 U_systematic.add_error_source(measurements=['PM'],distribution='norm',params=[0,0.15/(2*12)],source='b_PM',units='ft.lbf')
 U_systematic.add_error_source(measurements=['RM'],distribution='norm',params=[0,0.15/(2*12)],source='b_RM',units='ft.lbf')
 U_systematic.add_error_source(measurements=['YM'],distribution='norm',params=[0,0.15/(2*12)],source='b_YM',units='ft.lbf')
