@@ -8,10 +8,51 @@ AOA_raw = [-9 + 0.5*i for i in range(51)] # Angle of Attack in degrees
 
 
 #Model Constants
-Q = 20 # Dynamic Pressure in psf
-S = 0.77 # Wing Area in ft^2
-W = 15 # Weight in lbs
-AOA_offset = 0
+#Model Constants
+
+RHO = 0.00242 # Air Density in slugs/ft^3
+
+S = .774 # Wing Area in ft^2
+
+ 
+
+design = 'B' # Design A, B, C, or D
+
+if design == 'A':
+
+    Q = 14.6 # Dynamic Pressure in psf
+
+    theta_offset = 0 # Angle of attack offset in degrees
+
+    W = 10 # Weight in lbs
+
+elif design == 'B':
+
+    Q = 20 # Dynamic Pressure in psf
+
+    theta_offset = 0 # Angle of attack offset in degrees
+
+    W = 10 # Weight in lbs
+
+elif design == 'C':
+
+    Q = 20 # Dynamic Pressure in psf
+
+    theta_offset = -10 # Angle of attack offset in degrees
+
+    W = 15 # Weight in lbs
+
+elif design == 'D':
+
+    Q = 14.6 # Dynamic Pressure in psf
+
+    theta_offset = -10 # Angle of attack offset in degrees
+
+    W = 15 # Weight in lbs
+
+ 
+
+V = np.sqrt(2*Q/RHO) # Wind Tunnel Speed in ft/s
 
 #Update AOA_raw to AOA_list
 AOA_list = AOA_raw # Angle of Attack in degrees

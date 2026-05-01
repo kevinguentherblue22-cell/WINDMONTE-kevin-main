@@ -19,7 +19,22 @@ def DREs(input_data, G=None):
    # RHO_default = 0.002378
   #  S_default = 7.44
    # W_default = 15
-    Theta_offset = 10 # nose up balance at 0 AOA is positive
+
+design = 'B' # Design A, B, C, or D
+
+if design == 'A':
+    theta_offset = 0 # Angle of attack offset in degrees
+
+
+elif design == 'B':
+    theta_offset = 0 # Angle of attack offset in degrees
+
+
+elif design == 'C':
+    theta_offset = -10 # Angle of attack offset in degrees
+
+elif design == 'D':
+    theta_offset = -10 # Angle of attack offset in degrees
 
     # allow G to override S and W, otherwise use defaults
     S_local = G.get('S') 
