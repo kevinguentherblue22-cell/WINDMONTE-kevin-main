@@ -16,41 +16,27 @@ S = .774 # Wing Area in ft^2
 
  
 
-design = 'B' # Design A, B, C, or D
+design = 'C' # Design A, B, C, or D
 
 if design == 'A':
-
     Q = 14.6 # Dynamic Pressure in psf
-
     theta_offset = 0 # Angle of attack offset in degrees
-
     W = 10 # Weight in lbs
 
 elif design == 'B':
-
     Q = 20 # Dynamic Pressure in psf
-
     theta_offset = 0 # Angle of attack offset in degrees
-
     W = 10 # Weight in lbs
 
 elif design == 'C':
-
     Q = 20 # Dynamic Pressure in psf
-
-    theta_offset = -10 # Angle of attack offset in degrees
-
+    theta_offset = 10 # Angle of attack offset in degrees
     W = 15 # Weight in lbs
 
 elif design == 'D':
-
     Q = 14.6 # Dynamic Pressure in psf
-
-    theta_offset = -10 # Angle of attack offset in degrees
-
+    theta_offset = 10 # Angle of attack offset in degrees
     W = 15 # Weight in lbs
-
- 
 
 V = np.sqrt(2*Q/RHO) # Wind Tunnel Speed in ft/s
 
@@ -59,7 +45,7 @@ AOA_list = AOA_raw # Angle of Attack in degrees
 CL_list = [.0806*a+.2495 for a in AOA_list] # Lift Coefficient
 CD_list = [.0271+.0534*x**2 for x in CL_list] # Drag Coefficient
 
-Theta_list = [a + AOA_offset for a in AOA_list]
+Theta_list = [a + theta_offset for a in AOA_list]
 
 # Initializing array to store results
 N_mean_list = np.zeros(len(CL_list))
@@ -82,17 +68,20 @@ for i in range(len(CL_list)):
     D = Q * S * CD # Drag in lbs
 
     # Equations to get N_aero and A_aero
-    N_aero = L * math.cos(A) + D * math.sin(A) # Aerodynamic Normal Force in lbs
-    A_aero = - L * math.sin(A) + D * math.cos(A) # Aerodynamic Axial Force in lbs
+    #N_aero = L * math.cos(A) + D * math.sin(A) # Aerodynamic Normal Force in lbs
+    #A_aero = - L * math.sin(A) + D * math.cos(A) # Aerodynamic Axial Force in lbs
 
     # Equations to get N_meas and A_meas
-    N_meas = N_aero - W * math.cos(A) # Measured Normal Force in lbs
-    A_meas = A_aero + W * math.sin(A) # Measured Axial Force in lbs
+    #N_meas = N_aero - W * math.cos(A) # Measured Normal Force in lbs
+    #A_meas = A_aero + W * math.sin(A) # Measured Axial Force in lbs
+
+    N_meas = (L-W) * math.cos(A) + D * math.sin(A) # Aerodynamic Normal Force in lbs
+    A_meas = - (L-W) * math.sin(A) + D * math.cos(A) # Aerodynamic Axial Force in lbs
 
     #Stores all values as data
     data.append({'NF': N_meas, 'AF': A_meas, 'SF': 0, 'PM': 0, 'RM': 0,'YM': 0, 'Theta': Theta, 'Q': Q, 'S': S, 'W': W, 'AOA': AOA_list[i]})
 
-testinfo = {'S': S, 'W': W, 'RunNum': 1}
+testinfo = {'S': S, 'W': W, 'RunNum': 1, 'Design': design, 'Theta_offset': theta_offset}
 
 # Wind tunnel speed and angles (AOA, model constants, dynamic pressure (q), desity sea level)
 #saves the dictioary as a pickle file 

@@ -38,7 +38,7 @@ tic = time.time()
 
 # 1.1 Input MCM parameters
 M = 1000  # Number of MCM trials to run.  Recommend >500 
-outputfile = 'output_data.pkl'  # specify output file
+#outputfile = 'output_data.pkl'  # specify output file
 UPCs = True  # Set to True to compute the UPCs
 UPC_M = 100  # Set the number of trials to simulate for each error source in calculating UPCs.  Recommend >100.
 
@@ -86,95 +86,54 @@ follow the format used in the example:
     - source: label the source for plotting later
     - units: list the units, must match the units in the 'data' variable nominal values for each measurement the error source applies to
 """
-design = 'B' # Set to A, B, C, or D to select the error sources for that design.
+design = testinfo["Design"] 
  
-
 if design == 'A':
-
     # Design A
-
-    U_systematic.add_error_source(measurements=['Alpha'],distribution='norm',params=[0,0.05/2],source='b_Alpha',units='deg')
-
+    U_systematic.add_error_source(measurements=['Theta'],distribution='norm',params=[0,0.05/2],source='b_Alpha',units='deg')
     U_systematic.add_error_source(measurements=['Q'],distribution='norm',params=[0,0.06],source='b_Q',units='psf')
-
     U_systematic.add_error_source(measurements=['NF'],distribution='norm',params=[0,0.075/2],source='b_NF',units='lbf')
-
     U_systematic.add_error_source(measurements=['SF'],distribution='norm',params=[0,0.15/2],source='b_SF',units='lbf')
-
     U_systematic.add_error_source(measurements=['AF'],distribution='norm',params=[0,0.0375/2],source='b_AF',units='lbf')
-
     U_systematic.add_error_source(measurements=['PM'],distribution='norm',params=[0,0.075/2],source='b_PM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['RM'],distribution='norm',params=[0,0.15/(2*12)],source='b_RM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['YM'],distribution='norm',params=[0,0.15/(2*12)],source='b_YM',units='ft.lbf')
-
     outputfile = 'output_data_Design_A.pkl'  # specify output file
 
 elif design == 'B':
-
     # Design B
-
-    U_systematic.add_error_source(measurements=['Alpha'],distribution='norm',params=[0,0.018/2],source='b_Alpha',units='deg')
-
+    U_systematic.add_error_source(measurements=['Theta'],distribution='norm',params=[0,0.018/2],source='b_Alpha',units='deg')
     U_systematic.add_error_source(measurements=['Q'],distribution='norm',params=[0,0.06],source='b_Q',units='psf')
-
     U_systematic.add_error_source(measurements=['NF'],distribution='norm',params=[0,0.075/2],source='b_NF',units='lbf')
-
     U_systematic.add_error_source(measurements=['SF'],distribution='norm',params=[0,0.15/2],source='b_SF',units='lbf')
-
     U_systematic.add_error_source(measurements=['AF'],distribution='norm',params=[0,0.0375/2],source='b_AF',units='lbf')
-
     U_systematic.add_error_source(measurements=['PM'],distribution='norm',params=[0,0.075/2],source='b_PM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['RM'],distribution='norm',params=[0,0.15/(2*12)],source='b_RM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['YM'],distribution='norm',params=[0,0.15/(2*12)],source='b_YM',units='ft.lbf')
-
     outputfile = 'output_data_Design_B.pkl'  # specify output file
 
 elif design == 'C':
-
     # Design C
-
-    U_systematic.add_error_source(measurements=['Alpha'],distribution='norm',params=[0,0.05/2],source='b_Alpha',units='deg')
-
+    U_systematic.add_error_source(measurements=['Theta'],distribution='norm',params=[0,0.05/2],source='b_Alpha',units='deg')
     U_systematic.add_error_source(measurements=['Q'],distribution='norm',params=[0,0.06],source='b_Q',units='psf')
-
-    U_systematic.add_error_source(measurements=['NF'],distribution='norm',params=[0,0.75/2],source='b_NF',units='lbf')
-
+    U_systematic.add_error_source(measurements=['NF'],distribution='norm',params=[0,0.075/2],source='b_NF',units='lbf')
     U_systematic.add_error_source(measurements=['SF'],distribution='norm',params=[0,0.15/2],source='b_SF',units='lbf')
-
     U_systematic.add_error_source(measurements=['AF'],distribution='norm',params=[0,0.0375/2],source='b_AF',units='lbf')
-
     U_systematic.add_error_source(measurements=['PM'],distribution='norm',params=[0,0.075/2],source='b_PM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['RM'],distribution='norm',params=[0,0.15/(2*12)],source='b_RM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['YM'],distribution='norm',params=[0,0.15/(2*12)],source='b_YM',units='ft.lbf')
-
     outputfile = 'output_data_Design_C.pkl'  # specify output file
 
 elif design == 'D':
-
     # Design D
-
-    U_systematic.add_error_source(measurements=['Alpha'],distribution='norm',params=[0,0.018/2],source='b_Alpha',units='deg')
-
+    U_systematic.add_error_source(measurements=['Theta'],distribution='norm',params=[0,0.018/2],source='b_Alpha',units='deg')
     U_systematic.add_error_source(measurements=['Q'],distribution='norm',params=[0,0.06],source='b_Q',units='psf')
-
     U_systematic.add_error_source(measurements=['NF'],distribution='norm',params=[0,0.06/2],source='b_NF',units='lbf')
-
     U_systematic.add_error_source(measurements=['SF'],distribution='norm',params=[0,0.15/2],source='b_SF',units='lbf')
-
     U_systematic.add_error_source(measurements=['AF'],distribution='norm',params=[0,0.01/2],source='b_AF',units='lbf')
-
     U_systematic.add_error_source(measurements=['PM'],distribution='norm',params=[0,0.075/2],source='b_PM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['RM'],distribution='norm',params=[0,0.15/(2*12)],source='b_RM',units='ft.lbf')
-
     U_systematic.add_error_source(measurements=['YM'],distribution='norm',params=[0,0.15/(2*12)],source='b_YM',units='ft.lbf')
-
     outputfile = 'output_data_Design_D.pkl'  # specify output file
 
 # 1.4 Define random uncertainty for Variables of Interest (VOIs) using direct comparison of replicate data --OR-- define random uncertainty for elemental error sources 

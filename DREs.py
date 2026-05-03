@@ -5,7 +5,7 @@ import DRE_WM
 import LSWT
 
 #Data prediction
-def eval(data,G=None):
+def eval(data,G):
 
     D = DRE_WM.DREs(data,G)
 
