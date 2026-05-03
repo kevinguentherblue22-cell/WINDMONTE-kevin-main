@@ -70,7 +70,7 @@ def plot_overlay_uncertainties(file_paths, legend_labels=None, xvar='AOA', yvars
                 print(f'Failed to extract {yvar} from {file_path}: {exc}')
                 continue
 
-            ax.plot(x, y, marker='o', linewidth=2, label=label)
+            ax.plot(x, y, linewidth=2, label=label)
             ax.set_title(f'{yvar} uncertainty vs {xvar}')
             ax.set_xlabel(xvar)
             ax.set_ylabel('Uncertainty magnitude')
