@@ -16,7 +16,7 @@ S = .774 # Wing Area in ft^2
 
  
 
-design = 'C' # Design A, B, C, or D
+design = 'D' # Design A, B, C, or D
 
 if design == 'A':
     Q = 14.6 # Dynamic Pressure in psf

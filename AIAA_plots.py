@@ -45,7 +45,7 @@ def extract_uncertainty_vs_x(run_data, xvar, yvar):
     return np.array(x), np.array(y)
 
 
-def plot_overlay_uncertainties(file_paths, legend_labels=None, xvar='AOA', yvars=('CD', 'CL')):
+def plot_overlay_uncertainties(file_paths, legend_labels=None, xvar='AOA', yvars=('CL', 'CD')):
     """Overlay uncertainty magnitudes for multiple RunData pickle files."""
     if len(file_paths) == 0:
         print('No files selected.')

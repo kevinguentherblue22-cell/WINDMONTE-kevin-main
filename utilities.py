@@ -242,7 +242,7 @@ class TestRun(list):
             
             ax.bar(x,Uy)
             ax.set_xlabel(xvar)
-            ax.set_ylabel(yvar)
+            ax.set_ylabel(yvar + ' Uncertainty')
 
         # Hide any unused subplots
         for j in range(num_plots, nrows * ncols):
